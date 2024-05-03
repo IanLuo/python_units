@@ -1,0 +1,34 @@
+metadata:
+  name: python_units
+  version: 1.0
+  description: Some common pyhon tools
+
+include:
+  ss: github:ianluo/templates
+  nixpkgs: github:NixOS/nixpkgs/nixos-23.11
+
+units:
+  python:
+    source: $nixpkgs.python310
+    instantiate: |
+      python -m venv .venv
+      source .venv/bin/activate
+
+  poetry:
+    source: $nixpkgs.poetry
+    actions:
+      install: "poetry install"
+      add: "poetryh add"
+      list: "poetry list"
+      build: "poetry build"
+
+  pyright:
+    source: $nixpkgs.nodePackages.pyright
+
+actions:
+  test: "pytest tests"
+  build: $poetry.build
+  install: $poetry.install
+  add: $poetry.add
+  list: $poetry.list
+

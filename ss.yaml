@@ -4,8 +4,8 @@ metadata:
   description: Some common pyhon tools
 
 include:
-  ss: github:ianluo/templates
-  nixpkgs: github:NixOS/nixpkgs/nixos-23.11
+  ss: https://github.com/ianluo/templates
+  nixpkgs: https://github.com/NixOS/nixpkgs/nixos-23.11
 
 units:
   python:

@@ -7,7 +7,7 @@ include:
   ss: https://github.com/ianluo/templates
   nixpkgs: 
     url: https://github.com/NixOS/nixpkgs
-    branch: nixpkgs-unstable
+    ref: nixpkgs-unstable
 
 units:
   python:

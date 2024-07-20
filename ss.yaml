@@ -5,7 +5,9 @@ metadata:
 
 include:
   ss: https://github.com/ianluo/templates
-  nixpkgs: https://github.com/NixOS/nixpkgs/nixos-23.11
+  nixpkgs: 
+    url: https://github.com/NixOS/nixpkgs
+    branch: nixpkgs-unstable
 
 units:
   python:

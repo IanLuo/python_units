@@ -4,7 +4,7 @@ metadata:
   description: Some common pyhon tools
 
 include:
-  ss: https://github.com/ianluo/templates
+  templates: https://github.com/ianluo/templates
   nixpkgs: 
     url: https://github.com/NixOS/nixpkgs
     ref: nixpkgs-unstable

@@ -4,33 +4,44 @@ metadata:
   description: Some common pyhon tools
 
 include:
-  templates: https://github.com/ianluo/templates
+  templates: path:///Users/ianluo/Documents/apps/templates
+  nixpkgs-python: 
+    url: https://github.com/cachix/nixpkgs-python
+    callable: false
   nixpkgs: 
     url: https://github.com/NixOS/nixpkgs
     ref: nixpkgs-unstable
 
 units:
   python:
-    source: $nixpkgs.python310
-    instantiate: |
-      python -m venv .venv
-      source .venv/bin/activate
+    version: "3.10.0"
+    doc: |
+      *version* is the version of python to use.
+      *instantiate* is the command to create a virtual environment, and automatically activate when the working
+      environment is entered.
+    source: nixpkgs-python.packages.${templates.lib.env.system}.${version}
+      # url>: https://www.python.org/ftp/python/$version/Python-$version.tgz
+      # git>:
+      #   url: xxx
+      #   branch: xx
+    instantiate: 
+      sh>: |
+        python -m venv .venv
+        source .venv/bin/activate
 
   poetry:
-    source: $nixpkgs.poetry
+    source: nixpkgs.poetry
     actions:
       install: "poetry install"
-      add: "poetryh add"
+      add: "poetry add"
       list: "poetry list"
       build: "poetry build"
 
-  pyright:
-    source: $nixpkgs.pyright
+  pyright: nixpkgs.pyright
 
 actions:
-  test: "pytest tests"
-  build: $poetry.build
-  install: $poetry.install
-  add: $poetry.add
-  list: $poetry.list
-
+  test: pytest tests
+  build: ^poetry.build
+  install: ^poetry.install
+  add: ^poetry.add
+  list: ^poetry.list

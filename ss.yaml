@@ -24,7 +24,7 @@ units:
       # git>:
       #   url: xxx
       #   branch: xx
-    instantiate: 
+    on_start: 
       sh>: |
         python -m venv .venv
         source .venv/bin/activate

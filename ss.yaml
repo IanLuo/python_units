@@ -20,11 +20,7 @@ units:
       *instantiate* is the command to create a virtual environment, and automatically activate when the working
       environment is entered.
     source: nixpkgs-python.packages.${templates.lib.env.system}.${version}
-      # url>: https://www.python.org/ftp/python/$version/Python-$version.tgz
-      # git>:
-      #   url: xxx
-      #   branch: xx
-    on_start: 
+    onstart: 
       sh>: |
         python -m venv .venv
         source .venv/bin/activate
@@ -32,16 +28,21 @@ units:
   poetry:
     source: nixpkgs.poetry
     actions:
-      install: "poetry install"
-      add: "poetry add"
-      list: "poetry list"
-      build: "poetry build"
+      install: 
+        sh>: "poetry install"
+      add: 
+        sh>: "poetry add"
+      list:
+        sh>: "poetry list"
+      build:
+        sh>: "poetry build"
 
   pyright: nixpkgs.pyright
 
 actions:
-  test: pytest tests
-  build: ^poetry.build
-  install: ^poetry.install
-  add: ^poetry.add
-  list: ^poetry.list
+  test:
+    sh>: pytest.tests
+  build: poetry.actions.build
+  install: poetry.actions.install
+  add: poetry.actions.add
+  list: poetry.actions.list

@@ -19,30 +19,34 @@ units:
       *version* is the version of python to use.
       *instantiate* is the command to create a virtual environment, and automatically activate when the working
       environment is entered.
-    source: nixpkgs-python.packages.${templates.lib.env.system}.${version}
+    source: nixpkgs-python.packages.${sslib.env.system}.${version}
     onstart: 
       sh>: |
-        python -m venv .venv
-        source .venv/bin/activate
+        python -m venv .venv${version}
+        source .venv${version}/bin/activate
 
   poetry:
     source: nixpkgs.poetry
     actions:
       install: 
-        sh>: "poetry install"
+        sh>: poetry install
       add: 
-        sh>: "poetry add"
+        sh>: poetry add $1
       list:
-        sh>: "poetry list"
+        sh>: poetry list
       build:
-        sh>: "poetry build"
+        sh>: poetry build
 
   pyright: nixpkgs.pyright
 
 actions:
   test:
-    sh>: pytest.tests
-  build: poetry.actions.build
-  install: poetry.actions.install
-  add: poetry.actions.add
-  list: poetry.actions.list
+    sh>: pytest tests
+  build:
+    action>: poetry.actions.build
+  install:
+    action>: poetry.actions.install
+  add: 
+    action>: poetry.actions.add
+  list: 
+    action>: poetry.actions.list

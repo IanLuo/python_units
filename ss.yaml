@@ -3,7 +3,7 @@ metadata:
   version: 1.0
   description: Some common pyhon tools
 
-include:
+includes:
   templates: path:///Users/ianluo/Documents/apps/templates
   nixpkgs-python: 
     url: https://github.com/cachix/nixpkgs-python
